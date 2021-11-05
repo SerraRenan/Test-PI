@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+	</head>
+	<body>
+		<div class="container">
+		<div class="row b-5 m-5">
+				<div class="col">
+				 <h1>Controle de Encomendas</h1>
+				</div>
+		</div>
+			<div class="row mb-5">
+				<div class="col">
+				<form method="post" action="{{url_for('index')}}">
+				<div class="row">
+					  <div class="col">
+						<label for="destinatario" class="form-label">Destnatário</label>
+						<input type="text" class="form-control" id="destinatario">
+					  </div>
+					  <div class="col">
+						<label for="ramal" class="form-label">Ramal</label>
+						<input type="number" class="form-control" id="ramal">
+					  </div>
+					  <div class="col">
+						<label for="email" class="form-label">Email</label>
+						<input type="email" class="form-control" id="email">
+					  </div>
+				</div>	  
+				<div class="row mb-3">
+					  <div class="col">
+						<label for="description" class="form-label">Descrição</label>
+						<input type="text" class="form-control" id="description">
+					  </div>
+
+				</div>	  
+				  <button type="submit" class="btn btn-primary">Cadastrar</button>
+				</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									ID
+								</th>
+								<th>
+									Destinatario
+								</th>
+								<th>
+									Ramal
+								</th>
+								<th>
+									E-mail
+								</th>
+								<th>
+									Descrição
+								</th>
+								<th>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for encomenda in encomendas %}
+							<tr>
+								<td>
+									{{ encomenda[0] }}
+								</td>
+								<td>
+									{{ encomenda[1] }}
+								</td>
+								<td>
+									{{ encomenda[2] }}
+								</td>
+								<td>
+									{{ encomenda[3] }}
+								</td>
+								<td>
+									{{ encomenda[4] }}
+								</td>
+								<td>
+									{{ encomenda[5] }}
+								</td>
+								<td>
+									{{ encomenda[6] }}
+								</td>
+								
+									{% if encomenda[7] %}
+										<td class="text-success">
+											Entregue
+										</td>
+									{% else %}
+										<td class="text-danger">
+											<form method="post" action="{{url_for('index')}}">
+												<input type="hidden" id="id" value="{{ encomenda[0] }}">
+												<button type="submit" class="btn btn-success">Entregar</button>
+											</form>
+										</td>
+										
+									{% endif %}
+	
+							</tr>
+						{% endfor %}
+						<tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
