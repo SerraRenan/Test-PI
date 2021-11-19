@@ -10,9 +10,7 @@ def criaTabelas():
     conexao = conectar()
     sql = """CREATE TABLE IF NOT EXISTS ENCOMENDAS(
     id integer PRIMARY KEY,
-    altura integer, 
-    largura integer, 
-    peso integer, 
+    description text
     destinatario text, 
     ramal integer, 
     email text,
@@ -23,11 +21,10 @@ def criaTabelas():
     conexao.close()
     return
 
-
 def cadastraEncomenda(description, destinatario, ramal, email):
     conexao = conectar()
     encomenda = (description, destinatario, ramal, email, 0);
-    sql ="INSERT INTO ENCOMENDAS(description, destinatario, ramal, email, retirada) VALUES (?, ?, ?, ?, ?)";
+    sql = "INSERT INTO ENCOMENDAS(description, destinatario, ramal, email, retirada) VALUES (?, ?, ?, ?, ?)";
     conexao.cursor().execute(sql, encomenda)
     conexao.commit()
     conexao.close()
